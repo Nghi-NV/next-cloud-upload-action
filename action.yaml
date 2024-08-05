@@ -33,6 +33,7 @@ runs:
       with:
         python-version: '3.10' 
     - name: Pass Inputs to Shell
+      shell: bash
       run: |
         echo "name=${{ inputs.name }}" >> $GITHUB_ENV
         echo "uploadPath=${{ inputs.uploadPath }}" >> $GITHUB_ENV
