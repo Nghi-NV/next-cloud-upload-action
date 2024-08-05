@@ -12,6 +12,10 @@ inputs:
   filePath:
     description: 'Path of the file need to upload'
     required: true
+  shareEnabled:
+    description: 'Enable share file or not'
+    required: true
+    default: 'true'
   url:
     description: 'Next cloud url'
     required: true
@@ -22,9 +26,9 @@ inputs:
     description: 'Next cloud password'
     required: true
 outputs:
-  share_url:
+  output_url:
     description: 'Path of the folder upload file on next cloud'
-    value: ${{ steps.uploadToNextCloud.outputs.shareUrl }}
+    value: ${{ steps.uploadToNextCloud.outputs.output_url }}
 runs:
   using: composite
   steps:
@@ -38,6 +42,7 @@ runs:
         echo "name=${{ inputs.name }}" >> $GITHUB_ENV
         echo "uploadPath=${{ inputs.uploadPath }}" >> $GITHUB_ENV
         echo "filePath=${{ inputs.filePath }}" >> $GITHUB_ENV
+        echo "shareEnabled=${{ inputs.shareEnabled }}" >> $GITHUB_ENV
         echo "url=${{ inputs.url }}" >> $GITHUB_ENV
         echo "username=${{ inputs.username }}" >> $GITHUB_ENV
         echo "password=${{ inputs.password }}" >> $GITHUB_ENV

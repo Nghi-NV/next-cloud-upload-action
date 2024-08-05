@@ -14,8 +14,9 @@ jobs:
           name: 'test.txt'
           uploadPath: ''
           filePath: 'test.txt'
+          shareEnabled: 'true'
           url: ${{ secrets.NEXT_CLOUD_URL }}
           username: ${{ secrets.NEXT_CLOUD_USERNAME }}
           password: ${{ secrets.NEXT_CLOUD_PASSWORD }}
-      - name: Print share url
-        run: echo "ShareUrl=${{ steps.uploadFile.outputs.share_url }}"
+      - name: Print output url
+        run: echo "output_url=${{ steps.uploadFile.outputs.output_url }}"

@@ -25,6 +25,12 @@ Required: **YES**.
 
 Next cloud url
 
+## ``shareEnabled``
+Required: **No**.  
+Default: **True**
+
+Share file after upload
+
 ## ``username``
 Required: **YES**.  
 
@@ -61,7 +67,7 @@ jobs:
           zip -r archive.zip *
 
       - name: Upload to Next Cloud
-        uses: Nghi-NV/next-cloud-upload-action@main
+        uses: Nghi-NV/next-cloud-upload-action@v1
         with:
           id: uploadFile
           filePath: "archive.zip"
@@ -72,6 +78,6 @@ jobs:
           password: ${{ secrets.NEXT_CLOUD_PASSWORD }}
       - name: Get upload link
         run: |
-          echo "${{ steps.uploadFile.outputs.share_url }}"
+          echo "${{ steps.uploadFile.outputs.output_url }}"
           
 ```
