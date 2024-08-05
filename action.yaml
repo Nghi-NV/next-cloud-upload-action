@@ -45,4 +45,4 @@ runs:
       id: uploadToNextCloud
       shell: bash
       run: |
-        python scripts/upload_file.py
+        python $GITHUB_ACTION_PATH/scripts/upload_file.py
