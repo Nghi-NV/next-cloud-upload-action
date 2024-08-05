@@ -1,8 +1,6 @@
 name: Next cloud upload action
 description: This action help to upload file to next cloud
 author: 'Nghi Nguyen'
-icon: activity
-color: green
 inputs:
   name:
     description: 'Name of the file to save'
@@ -10,6 +8,7 @@ inputs:
   uploadPath:
     description: 'Path of the folder upload file on next cloud'
     required: true
+    default: ''
   filePath:
     description: 'Path of the file need to upload'
     required: true
@@ -22,12 +21,22 @@ inputs:
   password:
     description: 'Next cloud password'
     required: true
-
+outputs:
+  share_url:
+    description: 'Path of the folder upload file on next cloud'
+    value: ${{ steps.uploadToNextCloud.outputs.shareUrl }}
 runs:
   using: composite
   steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'  
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash
     - name: Upload file to next cloud
+      id: uploadToNextCloud
       shell: bash
       run: |
-        shareUrl=$(python $GITHUB_ACTION_PATH/scripts/upload_file.py --repo ${{ github.repository }} --name "${{ inputs.name }}" --uploadPath "${{ inputs.uploadPath }}" --filePath "${{ inputs.filePath }}" --url "${{ inputs.url }}" --username "${{ inputs.username }}" --password "${{ inputs.password }}")
-        echo "::set-output name=shareUrl::$shareUrl"
+        python $GITHUB_ACTION_PATH/scripts/upload_file.py --repo ${{ github.repository }} --name "${{ inputs.name }}" --uploadPath "${{ inputs.uploadPath }}" --filePath "${{ inputs.filePath }}" --url "${{ inputs.url }}" --username "${{ inputs.username }}" --password "${{ inputs.password }}"

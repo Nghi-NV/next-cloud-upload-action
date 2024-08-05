@@ -32,7 +32,10 @@ def uploadFile():
     username = args.username
     password = args.password
     local_file_path = args.filePath
-    remote_file_path = args.uploadPath + "/" + args.name
+    remote_file_path = args.name
+    if args.uploadPath != "":
+        remote_file_path = args.uploadPath + "/" + args.name
+        
     next_cloud_url = args.url
 
     # Upload file
@@ -52,7 +55,7 @@ def uploadFile():
     result = subprocess.run(share_command, check=True, capture_output=True, text=True)
     url = result.stdout.split("<url>")[1].split("</url>")[0]
 
-    print(url)
+    print(f"::set-output name=shareUrl::{url}")
 
 if __name__ == "__main__":
     uploadFile()

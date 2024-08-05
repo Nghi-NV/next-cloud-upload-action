@@ -1,4 +1,3 @@
-[![build](https://github.com/Nghi-NV/next-cloud-upload-action/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/Nghi-NV/next-cloud-upload-action/actions)
 
 # next-cloud-upload-action
 Github action that uploads files to Next Cloud.
@@ -64,6 +63,7 @@ jobs:
       - name: Upload to Next Cloud
         uses: Nghi-NV/next-cloud-upload-action@main
         with:
+          id: uploadFile
           filePath: "archive.zip"
           name: "documentation.zip"
           uploadPath: ${{ secrets.NEXT_CLOUD_UPLOAD_PATH }}
@@ -72,6 +72,6 @@ jobs:
           password: ${{ secrets.NEXT_CLOUD_PASSWORD }}
       - name: Get upload link
         run: |
-          echo "${{ steps.step1.outputs.shareUrl }}"
+          echo "${{ steps.uploadFile.outputs.share_url }}"
           
 ```
