@@ -1,0 +1,31 @@
+name: Next cloud upload action
+description: This action help to upload file to next cloud
+author: 'Nghi Nguyen'
+inputs:
+  name:
+    description: 'Name of the file to save'
+    required: true
+  uploadPath:
+    description: 'Path of the folder upload file on next cloud'
+    required: true
+  filePath:
+    description: 'Path of the file need to upload'
+    required: true
+  url:
+    description: 'Next cloud url'
+    required: true
+  username:
+    description: 'Next cloud username'
+    required: true
+  password:
+    description: 'Next cloud password'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Upload file to next cloud
+      shell: bash
+      run: |
+        shareUrl=$(python $GITHUB_ACTION_PATH/scripts/upload_file.py --repo ${{ github.repository }} --name "${{ inputs.name }}" --uploadPath "${{ inputs.uploadPath }}" --filePath "${{ inputs.filePath }}" --url "${{ inputs.url }}" --username "${{ inputs.username }}" --password "${{ inputs.password }}")
+        echo "::set-output name=shareUrl::$shareUrl"
