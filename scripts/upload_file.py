@@ -7,36 +7,29 @@ import json
 import argparse
 
 def uploadFile():
-    parser = argparse.ArgumentParser(description='Upload file to server')
-    parser.add_argument('--name', type=str, help='name', required=True)
-    parser.add_argument('--uploadPath', type=str, help='uploadPath', required=True)
-    parser.add_argument('--filePath', type=str, help='filePath', required=True)
-    parser.add_argument('--url', type=str, help='url', required=True)
-    parser.add_argument('--username', type=str, help='username', required=True)
-    parser.add_argument('--password', type=str, help='password', required=True)
-    args = parser.parse_args()
+    name = os.environ.get('name')
+    uploadPath = os.environ.get('uploadPath')
+    local_file_path = os.environ.get('filePath')
+    next_cloud_url = os.environ.get('url')
+    username = os.environ.get('username')
+    password = os.environ.get('password')
 
     # check error input
-    if not os.path.exists(args.filePath):
-        print(f"File {args.filePath} not found")
+    if not os.path.exists(local_file_path):
+        print(f"File {local_file_path} not found")
         exit(1)
 
-    if args.name == "":
+    if name == "":
         print("Name is invalid")
         exit(1)
 
-    if not args.url.startswith("http"):
+    if not next_cloud_url.startswith("http"):
         print("URL is invalid")
         exit(1)
 
-    username = args.username
-    password = args.password
-    local_file_path = args.filePath
-    remote_file_path = args.name
-    if args.uploadPath != "":
-        remote_file_path = args.uploadPath + "/" + args.name
-        
-    next_cloud_url = args.url
+    remote_file_path = name
+    if uploadPath != "":
+        remote_file_path = uploadPath + "/" + name
 
     # Upload file
     upload_command = [

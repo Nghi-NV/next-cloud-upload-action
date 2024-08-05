@@ -32,8 +32,16 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
+    - name: Pass Inputs to Shell
+      run: |
+        echo "name=${{ inputs.name }}" >> $GITHUB_ENV
+        echo "uploadPath=${{ inputs.uploadPath }}" >> $GITHUB_ENV
+        echo "filePath=${{ inputs.filePath }}" >> $GITHUB_ENV
+        echo "url=${{ inputs.url }}" >> $GITHUB_ENV
+        echo "username=${{ inputs.username }}" >> $GITHUB_ENV
+        echo "password=${{ inputs.password }}" >> $GITHUB_ENV
     - name: Upload file to next cloud
       id: uploadToNextCloud
       shell: bash
       run: |
-        python $GITHUB_ACTION_PATH/scripts/upload_file.py --repo ${{ github.repository }} --name "${{ inputs.name }}" --uploadPath "${{ inputs.uploadPath }}" --filePath "${{ inputs.filePath }}" --url "${{ inputs.url }}" --username "${{ inputs.username }}" --password "${{ inputs.password }}"
+        python scripts/upload_file.py
