@@ -1,6 +1,9 @@
 name: Next cloud upload action
 description: This action help to upload file to next cloud
 author: 'Nghi Nguyen'
+branding:
+  icon: upload
+  color: green
 inputs:
   name:
     description: 'Name of the file to save'
