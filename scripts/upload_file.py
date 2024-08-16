@@ -51,9 +51,14 @@ def uploadFile():
         "-H", "OCS-APIRequest: true"
     ]
     result = subprocess.run(share_command, check=True, capture_output=True, text=True)
-    url = result.stdout.split("<url>")[1].split("</url>")[0]
 
-    print(f"::set-output name=output_url::{url}")
+    try {
+        url = result.stdout.split("<url>")[1].split("</url>")[0]
+        print(f"::set-output name=output_url::{url}")
+    }
+    except {
+        print("Error while creating share link", result.stdout)
+    }
 
 if __name__ == "__main__":
     uploadFile()
