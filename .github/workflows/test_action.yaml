@@ -12,7 +12,6 @@ jobs:
         uses: ./
         with:
           name: 'test.txt'
-          uploadPath: ''
           filePath: 'test.txt'
           shareEnabled: 'true'
           url: ${{ secrets.NEXT_CLOUD_URL }}
