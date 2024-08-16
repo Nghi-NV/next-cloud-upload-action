@@ -55,9 +55,9 @@ def uploadFile():
     try {
         url = result.stdout.split("<url>")[1].split("</url>")[0]
         print(f"::set-output name=output_url::{url}")
-    }
-    except {
-        print("Error while creating share link", result.stdout)
+    } catch {
+        print("Error while sharing file", result.stdout)
+        exit(1)
     }
 
 if __name__ == "__main__":

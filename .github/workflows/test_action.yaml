@@ -16,6 +16,7 @@ jobs:
           filePath: 'test.txt'
           shareEnabled: 'true'
           url: ${{ secrets.NEXT_CLOUD_URL }}
+          uploadPath: ${{ secrets.NEXT_CLOUD_UPLOAD_PATH }}
           username: ${{ secrets.NEXT_CLOUD_USERNAME }}
           password: ${{ secrets.NEXT_CLOUD_PASSWORD }}
       - name: Print output url
