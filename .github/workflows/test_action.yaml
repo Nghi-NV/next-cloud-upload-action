@@ -11,8 +11,8 @@ jobs:
         id: uploadFile
         uses: ./
         with:
-          name: 'test.txt'
-          filePath: 'test.txt'
+          name: 'test_1-23+1.txt'
+          filePath: 'test_1-23+1.txt'
           shareEnabled: 'true'
           url: ${{ secrets.NEXT_CLOUD_URL }}
           uploadPath: ${{ secrets.NEXT_CLOUD_UPLOAD_PATH }}

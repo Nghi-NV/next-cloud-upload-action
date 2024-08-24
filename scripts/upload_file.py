@@ -46,7 +46,7 @@ def uploadFile():
     # Create share link
     share_command = [
         "curl", "-u", f"{username}:{password}", "-X", "POST",
-        "-d", f"path=/{remote_file_path}", "-d", "shareType=3", "-d", "permissions=1",
+        "--data-urlencode", f"path=/{remote_file_path}", "-d", "shareType=3", "-d", "permissions=1",
         f"{next_cloud_url}/ocs/v2.php/apps/files_sharing/api/v1/shares",
         "-H", "OCS-APIRequest: true"
     ]
